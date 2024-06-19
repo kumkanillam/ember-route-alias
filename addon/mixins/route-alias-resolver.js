@@ -1,16 +1,18 @@
 import Ember from 'ember';
+import Resolver from 'ember-resolver';
+import { isArray } from '@ember/array';
 
-export default Ember.Mixin.create({
+export default class RouteAliasResolver extends Resolver{
 
   /**
   Push the new module name lookup pattern on to the list of previous lookup
   patterns.
   */
-  moduleNameLookupPatterns: Ember.computed(function() {
-    var result = this._super.call(this);
-    result.push(this.aliasedModuleName);
-    return result;
-  }),
+ constructor(){
+  super(...arguments);
+  if(isArray(this.moduleNameLookupPatterns))
+  this.moduleNameLookupPatterns.push(this.aliasedModuleName);
+ }
 
   /**
   Check to see if the targeted module has an alias in the lookup. If this lookup
@@ -38,4 +40,4 @@ export default Ember.Mixin.create({
       return false;
     }
   }
-});
+};
