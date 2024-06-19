@@ -19,10 +19,10 @@ In `app.js`:
 ```javascript
 import RouteAliasResolver from 'ember-route-alias/mixins/route-alias-resolver';
 
-App = Ember.Application.extend({
+export default class App extends Application {
   /* ... */
-  Resolver: Resolver.extend(RouteAliasResolver)
-});
+  Resolver: RouteAliasResolver
+};
 ```
 
 In `router.js`:
